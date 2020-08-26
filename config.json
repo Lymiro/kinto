@@ -1,57 +1,25 @@
 {
-    "inbounds": [
+    "inbounds": 
+    [
         {
-            "port": 8888,
-            "protocol": "vmess",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "220de408-9efe-4430-ada1-6fc3e969d6fc"
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "ws"
-            }
+            "port": 2333,"listen":"0.0.0.0","protocol": "vmess",
+            "settings": {"clients": [{"id": "220de408-9efe-4430-ada1-6fc3e969d6fc"}]},
+            "streamSettings": {"network": "ws"}
         }
     ],
 
-    "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct",
-            "settings": {}
-        },
-        {
-            "protocol": "socks",
-            "tag": "sockstor",
-            "settings": {
-                "servers": [
-                    {
-                        "address": "127.0.0.1",
-                        "port": 9050
-                    }
-                ]
-            }
-        }
+    "outbounds": 
+    [
+        {"protocol": "freedom","tag": "direct","settings": {}},
+        {"protocol": "socks","tag": "socksTor","settings": {"servers": [{"address": "127.0.0.1","port": 9050}]}}
     ],
 
-    "routing": {
-        "rules": [
-            {
-                "type": "field",
-                "outboundTag": "sockstor",
-                "domain": [
-                    "regexp:\\.onion$"
-                ]
-            },
-            {
-                "type": "field",
-                "outboundTag": "blocked",
-                "domain": [
-                    "geosite:category-ads-all"
-                ]
-            }
+    "routing": 
+    {
+        "rules": 
+        [
+            {"type": "field","outboundTag": "socksTor","domain": ["regexp:\\.onion$"]},
+            {"type": "field","outboundTag": "blocked","domain": ["geosite:category-ads-all"]}
         ]
     }
 }
